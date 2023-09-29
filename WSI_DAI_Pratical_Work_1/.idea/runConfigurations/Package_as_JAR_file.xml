@@ -28,7 +28,7 @@
           </option>
           <option name="goals">
             <list>
-              <option value="depedency:resolve" />
+              <option value="dependency:resolve" />
               <option value="clean" />
               <option value="compile" />
               <option value="package" />
