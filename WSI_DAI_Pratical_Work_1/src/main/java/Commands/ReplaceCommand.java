@@ -1,32 +1,41 @@
 package Commands;
 
 import picocli.CommandLine.*;
-
 import java.io.*;
 import java.nio.charset.Charset;
-import java.util.Objects;
+
+/**
+ *  -----------------------------------------------------------------------------------
+ * @author       : Slimani Walid
+ * @date         : 28.09.2023
+ *
+ * @Description  : This class is used to perform the command that can replace the first or all occurrences
+ *                 of a word with another one. It can also specify the encoding types of the input and
+ *                 output file.
+ *  -----------------------------------------------------------------------------------
+ **/
 
 @Command(name = "Replace", mixinStandardHelpOptions = true, version = "1.0",
-        description = "this command permits to replaces one word in a text file with another one.")
+         description = "this command permits to replaces one word in a text file with another one.")
 public class ReplaceCommand implements Runnable {
     // region Private Parameters
     // region Files Path
     @Parameters(paramLabel = "<Input-File>", arity = "1", index = "0",
-            description = "Input text file path")
+                description = "Input text file path")
     private String inputFilePath;
 
     @Parameters(paramLabel = "<Output-File>", arity = "1", index = "1",
-            description = "Output text file path")
+                description = "Output text file path")
     private String outputFilePath;
     // endregion
 
     // region Words
     @Parameters(paramLabel = "<Old-Word>", arity = "1", index = "2",
-            description = "The word that will be replaced")
+                description = "The word that will be replaced")
     private String oldWord;
 
     @Parameters(paramLabel = "<New-Word>", arity = "1", index = "3",
-            description = "The new word that will replace the old one")
+                description = "The new word that will replace the old one")
     private String newWord;
     // endregion
 
@@ -36,7 +45,7 @@ public class ReplaceCommand implements Runnable {
     private String inputFileEncoding;
 
     @Option(names = {"-oe", "--output-file-encoding"},
-            description = "type of output text file encoding (default : UTF-8)",  defaultValue = "UTF-8")
+            description = "type of output text file encoding (default : UTF-8)", defaultValue = "UTF-8")
     private String outputFileEncoding;
     // endregion
 
@@ -49,6 +58,13 @@ public class ReplaceCommand implements Runnable {
 
     // region Method
     // region Public Method
+
+    /**
+     * Nom          : run
+     * Description  : This is the method called when the replace command is used. This method calls a first
+     *                method that checks that the arguments are correct, then a second that makes the
+     *                word replacement.
+     */
     @Override
     public void run() {
         try {
@@ -61,6 +77,13 @@ public class ReplaceCommand implements Runnable {
     // endregion
 
     // region Private Method
+
+    /**
+     * Nom          : ReplaceWord
+     * Description  : This function reads the input text and rewrites it in the output text, replacing
+     *                a given word with another one.
+     * @throws IOException if an argument is incorrect or there's a problem when reading / writing a text file.
+     */
     private void ReplaceWord() throws IOException {
         // Creating Charset
         Charset inputFileCharset = Charset.forName(inputFileEncoding);
@@ -86,8 +109,7 @@ public class ReplaceCommand implements Runnable {
                         firstOccurrenceReplaced = true;
                     }
                     outputFile.write(tempLine);
-                }
-                else
+                } else
                     outputFile.write(currentLine);
 
                 outputFile.newLine();
@@ -95,6 +117,11 @@ public class ReplaceCommand implements Runnable {
         }
     }
 
+    /**
+     * Nom          : validateInput
+     * Description  : This function checks that the arguments given are valid.
+     * @throws IOException if an argument is incorrect.
+     */
     private void validateInput() throws IOException {
         // No opening of file streams requiring closing, so no try with resources
         File inputFile = new File(inputFilePath);
@@ -118,7 +145,7 @@ public class ReplaceCommand implements Runnable {
         if (!Charset.isSupported(outputFileEncoding))
             throw new IOException("Invalid output file encoding specified.");
 
-        if (!Objects.equals(replaceAll, "true") && !Objects.equals(replaceAll, "false"))
+        if (!replaceAll.equals("true") && !replaceAll.equals("false"))
             throw new IOException("Replace all parameter can't be different from true or false");
     }
     // endregion
