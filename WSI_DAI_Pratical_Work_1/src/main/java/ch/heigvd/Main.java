@@ -18,12 +18,12 @@
 
 package ch.heigvd;
 
-import Commands.ReplaceCommand;
+import Commands.*;
 import picocli.CommandLine;
 
 public class Main {
     public static void main(String[] args) {
-        int exitCode = new CommandLine(new ReplaceCommand()).execute(args);
+        int exitCode = new CommandLine(new ConvertBlackWhiteCommand()).execute(args);
         System.exit(exitCode);
     }
 }
