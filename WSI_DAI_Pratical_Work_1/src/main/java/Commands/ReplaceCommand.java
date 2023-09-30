@@ -1,10 +1,10 @@
 package Commands;
 
 import picocli.CommandLine.*;
+
 import java.io.*;
 import java.nio.charset.Charset;
-import java.nio.charset.CharsetDecoder;
-import java.nio.charset.CharsetEncoder;
+import java.util.Objects;
 
 @Command(name = "Replace", mixinStandardHelpOptions = true, version = "1.0",
         description = "this command permits to replaces one word in a text file with another one.")
@@ -32,12 +32,18 @@ public class ReplaceCommand implements Runnable {
 
     // region File Encoding Types
     @Option(names = {"-ie", "--input-file-encoding"},
-            description = "type of input text file encoding (default : UTF-8)")
-    private String inputFileEncoding = "UTF-8";
+            description = "type of input text file encoding (default : UTF-8)", defaultValue = "UTF-8")
+    private String inputFileEncoding;
 
     @Option(names = {"-oe", "--output-file-encoding"},
-            description = "type of output text file encoding (default : UTF-8)")
-    private String outputFileEncoding = "UTF-8";
+            description = "type of output text file encoding (default : UTF-8)",  defaultValue = "UTF-8")
+    private String outputFileEncoding;
+    // endregion
+
+    // region Replace all
+    @Option(names = {"-ao", "--all-occurrences"},
+            description = "Replace all occurrences of the text", defaultValue = "true")
+    private String replaceAll;
     // endregion
     // endregion
 
@@ -46,6 +52,7 @@ public class ReplaceCommand implements Runnable {
     @Override
     public void run() {
         try {
+            validateInput();
             ReplaceWord();
         } catch (IOException e) {
             System.err.println("Error: " + e.getMessage());
@@ -65,17 +72,54 @@ public class ReplaceCommand implements Runnable {
 
             String currentLine;
             String tempLine;
+            boolean firstOccurrenceReplaced = false;
 
             while ((currentLine = inputFile.readLine()) != null) {
-                if (currentLine.contains(oldWord)) {
+                if (currentLine.contains(oldWord) && !firstOccurrenceReplaced) {
                     tempLine = currentLine;
-                    tempLine = tempLine.replace(oldWord, newWord);
+
+                    if (replaceAll.equals("true"))
+                        tempLine = tempLine.replaceAll(oldWord, newWord);
+
+                    else if (replaceAll.equals("false")) {
+                        tempLine = tempLine.replaceFirst(oldWord, newWord);
+                        firstOccurrenceReplaced = true;
+                    }
                     outputFile.write(tempLine);
-                } else {
-                    outputFile.write(currentLine);
                 }
+                else
+                    outputFile.write(currentLine);
+
+                outputFile.newLine();
             }
         }
+    }
+
+    private void validateInput() throws IOException {
+        // No opening of file streams requiring closing, so no try with resources
+        File inputFile = new File(inputFilePath);
+        File outputFile = new File(outputFilePath);
+
+        if (!inputFile.exists() || !outputFile.exists())
+            throw new IOException("Input or output file does not exist.");
+
+        if (!inputFile.isFile() || !outputFile.isFile())
+            throw new IOException("Input or output is not a valid file.");
+
+        if (oldWord == null || oldWord.isEmpty())
+            throw new IOException("Old word cannot be empty.");
+
+        if (newWord == null)
+            throw new IOException("New word cannot be null.");
+
+        if (!Charset.isSupported(inputFileEncoding))
+            throw new IOException("Invalid input file encoding specified.");
+
+        if (!Charset.isSupported(outputFileEncoding))
+            throw new IOException("Invalid output file encoding specified.");
+
+        if (!Objects.equals(replaceAll, "true") && !Objects.equals(replaceAll, "false"))
+            throw new IOException("Replace all parameter can't be different from true or false");
     }
     // endregion
     // endregion
