@@ -1,7 +1,6 @@
 package Commands;
 
 import picocli.CommandLine.*;
-
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.*;
@@ -26,12 +25,6 @@ public class ConvertBlackWhiteCommand implements Runnable {
     @Parameters(paramLabel = "<Output-Image>", arity = "1", index = "1",
                 description = "Output image path")
     private String outputImagePath;
-    // endregion
-
-    // region Output image format
-    @Option(names = {"-f", "--format"},
-            description = "Output image format (e.g., jpg, png)", defaultValue = "jpeg")
-    private String outputFormat;
     // endregion
     // endregion
 
@@ -78,7 +71,7 @@ public class ConvertBlackWhiteCommand implements Runnable {
 
         // Check if the extension is valid for the output format
         if (!isValidOutputFormat(outputExtension))
-            throw new IllegalArgumentException("Invalid output format. Supported formats: jpg, png, gif, etc.");
+            throw new IllegalArgumentException("Invalid output format. Supported formats: jpg, jpeg, png.");
 
         // Save converted black & white image in jpg format
         ImageIO.write(blackAndWhiteImage, outputExtension, new File(outputImagePath));
