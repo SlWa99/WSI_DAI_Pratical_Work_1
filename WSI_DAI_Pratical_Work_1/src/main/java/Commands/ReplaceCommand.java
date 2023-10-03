@@ -3,6 +3,7 @@ package Commands;
 import picocli.CommandLine.*;
 import java.io.*;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 
 /**
  *  -----------------------------------------------------------------------------------
@@ -10,7 +11,7 @@ import java.nio.charset.Charset;
  * @date         : 28.09.2023
  *
  * @Description  : This class is used to perform the command that can replace the first or all occurrences
- *                 of a word with another one. It can also specify the encoding types of the input and
+ *                 of a word with another one. It can also specify the encoding types of the
  *                 output file.
  *  -----------------------------------------------------------------------------------
  **/
@@ -40,10 +41,6 @@ public class ReplaceCommand implements Runnable {
     // endregion
 
     // region File Encoding Types
-    @Option(names = {"-ie", "--input-file-encoding"},
-            description = "type of input text file encoding (default : UTF-8)", defaultValue = "UTF-8")
-    private String inputFileEncoding;
-
     @Option(names = {"-oe", "--output-file-encoding"},
             description = "type of output text file encoding (default : UTF-8)", defaultValue = "UTF-8")
     private String outputFileEncoding;
@@ -85,12 +82,11 @@ public class ReplaceCommand implements Runnable {
      * @throws IOException if an argument is incorrect or there's a problem when reading / writing a text file.
      */
     private void ReplaceWord() throws IOException {
-        // Creating Charset
-        Charset inputFileCharset = Charset.forName(inputFileEncoding);
+        // Creating Charset for output file
         Charset outputFileCharset = Charset.forName(outputFileEncoding);
 
         // Creating the files
-        try (BufferedReader inputFile = new BufferedReader(new FileReader(inputFilePath, inputFileCharset));
+        try (BufferedReader inputFile = new BufferedReader(new FileReader(inputFilePath, StandardCharsets.UTF_8));
              BufferedWriter outputFile = new BufferedWriter(new FileWriter(outputFilePath, outputFileCharset))) {
 
             String currentLine;
@@ -138,9 +134,6 @@ public class ReplaceCommand implements Runnable {
 
         if (newWord == null)
             throw new IOException("New word cannot be null.");
-
-        if (!Charset.isSupported(inputFileEncoding))
-            throw new IOException("Invalid input file encoding specified.");
 
         if (!Charset.isSupported(outputFileEncoding))
             throw new IOException("Invalid output file encoding specified.");
