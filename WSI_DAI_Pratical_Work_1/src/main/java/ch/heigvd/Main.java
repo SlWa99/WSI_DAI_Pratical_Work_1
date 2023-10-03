@@ -23,7 +23,10 @@ import picocli.CommandLine;
 
 public class Main {
     public static void main(String[] args) {
-        int exitCode = new CommandLine(new ConvertBlackWhiteCommand()).execute(args);
+        CommandLine commandLine = new CommandLine(new ReplaceCommand()).setCommandName("Replace");
+        commandLine.addSubcommand("Convert", new CommandLine(new ConvertBlackWhiteCommand()));
+
+        int exitCode = commandLine.execute(args);
         System.exit(exitCode);
     }
 }
