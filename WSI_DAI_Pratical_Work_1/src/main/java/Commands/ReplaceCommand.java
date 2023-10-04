@@ -6,14 +6,14 @@ import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 
 /**
- *  -----------------------------------------------------------------------------------
- * @author       : Slimani Walid
- * @date         : 28.09.2023
+ * -----------------------------------------------------------------------------------
  *
- * @Description  : This class is used to perform the command that can replace the first or all occurrences
- *                 of a word with another one. It can also specify the encoding types of the
- *                 output file.
- *  -----------------------------------------------------------------------------------
+ * @author      : Slimani Walid
+ * @date        : 28.09.2023
+ * @Description : This class is used to perform the command that can replace the first or all occurrences
+ *                of a word with another one. It can also specify the encoding types of the
+ *                output file.
+ * -----------------------------------------------------------------------------------
  **/
 
 @Command(name = "Replace", mixinStandardHelpOptions = true, version = "1.0",
@@ -71,17 +71,88 @@ public class ReplaceCommand implements Runnable {
             System.err.println("Error: " + e.getMessage());
         }
     }
+
+    // region Setter
+
+    /**
+     * Nom                  : setInputFilePath
+     * Description          : Defines the path of the input file to be used for the replace function.
+     * @param inputFilePath : Path of the input file.
+     * @info                : This setter exists only to be able to use the replacement command in
+     *                        the test class.
+     */
+    public void setInputFilePath(String inputFilePath) {
+        this.inputFilePath = inputFilePath;
+    }
+
+    /**
+     * Nom                   : setOutputFilePath
+     * Description           : Defines the path of the output file to be used for the replace function.
+     * @param outputFilePath : Path of the output file.
+     * @info                 : This setter exists only to be able to use the replacement command in
+     *                         the test class.
+     */
+    public void setOutputFilePath(String outputFilePath) {
+        this.outputFilePath = outputFilePath;
+    }
+
+    /**
+     * Nom            : setOldWord
+     * Description    : Defines the word to be replaced in the text file.
+     * @param oldWord : Word to replace
+     * @info          : This setter exists only to be able to use the replacement command in
+     *                  the test class.
+     */
+    public void setOldWord(String oldWord) {
+        this.oldWord = oldWord;
+    }
+
+    /**
+     * Nom            : setNewWord
+     * Description    : Defines the new word that will replace the old word in the text file.
+     * @param newWord : substitute word
+     * @info          : This setter exists only to be able to use the replacement command in
+     *                  the test class.
+     */
+    public void setNewWord(String newWord) {
+        this.newWord = newWord;
+    }
+
+    /**
+     * Nom            : setCharSet
+     * Description    : Defines the encoding type for the output file.
+     * @param charset : The charset to apply (UTF-8, US-ASCII etc.)
+     * @info          : This setter exists only to be able to use the replacement command in
+     *                  the test class.
+     */
+    public void setCharSet(String charset) {
+        this.outputFileEncoding = charset;
+    }
+
+    /**
+     * Nom               : setReplaceAll
+     * Description       : Defines the boolean which indicate if the Replace function will replace
+     *                     the first occurrence or all occurrences.
+     * @param replaceAll : Boolean value (true = replace all, false = replace first occurrence)
+     * @info             : This setter exists only to be able to use the replacement command in
+     *                     the test class.
+     */
+    public void setReplaceAll(String replaceAll) {
+        this.replaceAll = replaceAll;
+    }
+    // endregion
     // endregion
 
     // region Private Method
 
     /**
-     * Nom          : ReplaceWord
-     * Description  : This function reads the input text and rewrites it in the output text, replacing
-     *                a given word with another one.
+     * Nom         : ReplaceWord
+     * Description : This function reads the input text and rewrites it in the output text, replacing
+     *               a given word with another one.
+     * @info       : This method is public only for access in the test class. Normally, it should be private.
      * @throws IOException if an argument is incorrect or there's a problem when reading / writing a text file.
      */
-    private void ReplaceWord() throws IOException {
+    public void ReplaceWord() throws IOException {
         // Creating Charset for output file
         Charset outputFileCharset = Charset.forName(outputFileEncoding);
 
@@ -100,7 +171,7 @@ public class ReplaceCommand implements Runnable {
                     if (replaceAll.equals("true"))
                         tempLine = tempLine.replaceAll(oldWord, newWord);
 
-                    else if (replaceAll.equals("false")) {
+                    else if (replaceAll.equals("false")){
                         tempLine = tempLine.replaceFirst(oldWord, newWord);
                         firstOccurrenceReplaced = true;
                     }
