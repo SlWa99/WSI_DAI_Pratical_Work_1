@@ -46,6 +46,30 @@ public class ConvertBlackWhiteCommand implements Runnable {
             System.err.println("Error: " + e.getMessage());
         }
     }
+
+    // region Setter
+    /**
+     * Nom                   : setInputImagePath
+     * Description           : Defines the path of the input image to be used for the convert function.
+     * @param inputImagePath : Path of the input image.
+     * @info                 : This setter exists only to be able to use the replacement command in
+     *                         the test class.
+     */
+    public void setInputImagePath(String inputImagePath) {
+        this.inputImagePath = inputImagePath;
+    }
+
+    /**
+     * Nom                    : setOutputImagePath
+     * Description            : Defines the path of the output image to be used for the convert function.
+     * @param outputImagePath : Path of the output image.
+     * @info                  : This setter exists only to be able to use the replacement command in
+     *                          the test class.
+     */
+    public void setOutputImagePath(String outputImagePath) {
+        this.outputImagePath = outputImagePath;
+    }
+    // endregion
     // endregion
 
     // region Private Method

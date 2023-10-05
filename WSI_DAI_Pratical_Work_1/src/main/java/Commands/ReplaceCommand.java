@@ -149,10 +149,9 @@ public class ReplaceCommand implements Runnable {
      * Nom         : ReplaceWord
      * Description : This function reads the input text and rewrites it in the output text, replacing
      *               a given word with another one.
-     * @info       : This method is public only for access in the test class. Normally, it should be private.
      * @throws IOException if an argument is incorrect or there's a problem when reading / writing a text file.
      */
-    public void ReplaceWord() throws IOException {
+    private void ReplaceWord() throws IOException {
         // Creating Charset for output file
         Charset outputFileCharset = Charset.forName(outputFileEncoding);
 
@@ -171,7 +170,7 @@ public class ReplaceCommand implements Runnable {
                     if (replaceAll.equals("true"))
                         tempLine = tempLine.replaceAll(oldWord, newWord);
 
-                    else if (replaceAll.equals("false")){
+                    else if (replaceAll.equals("false")) {
                         tempLine = tempLine.replaceFirst(oldWord, newWord);
                         firstOccurrenceReplaced = true;
                     }

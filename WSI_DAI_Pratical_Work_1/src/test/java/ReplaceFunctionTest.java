@@ -33,11 +33,10 @@ public class ReplaceFunctionTest {
     /**
      * Nom          : testReplaceAllOccurrence
      * Description  : Tests the replacement of all occurrences of a word in a file.
-     * @throws IOException if an input/output error occurs during file playback.
      */
     @Test
     @DisplayName("Test all occurrences")
-    public void testReplaceAllOccurrence() throws IOException {
+    public void testReplaceAllOccurrence() {
         String assertMsg = "Not all occurrences have been replaced";
 
         try {
@@ -51,11 +50,10 @@ public class ReplaceFunctionTest {
     /**
      * Nom          : testReplaceFirstOccurrence
      * Description  : Tests the replacement of the first occurrence of a word in a file.
-     * @throws IOException if an input/output error occurs during file playback.
      */
     @Test
     @DisplayName("Test first occurrence")
-    public void testReplaceFirstOccurrence() throws IOException {
+    public void testReplaceFirstOccurrence() {
         String assertMsg = "More than one or zero occurrence has been replaced";
 
         try {
@@ -69,11 +67,10 @@ public class ReplaceFunctionTest {
     /**
      * Nom          : testInputFileModification
      * Description  : Tests the modification of the input file by the replace function.
-     * @throws IOException if an input/output error occurs during file playback.
      */
     @Test
     @DisplayName("Input file modification")
-    public void testInputFileModification() throws IOException {
+    public void testInputFileModification() {
         String assertMsg = "The input file has been modified by the Replace function.";
 
         try {
@@ -176,11 +173,10 @@ public class ReplaceFunctionTest {
      * @param charset     : File encoding.
      * @param replaceAll  : Indicates whether all occurrences of the word should be replaced (true) or
      *                      only the first one (false).
-     * @throws IOException if an I/O error occurs while reading or writing files.
      */
     private void executeReplaceCommand(String inputFile, String fileToWrite,
                                        String oldWord, String newWord,
-                                       String charset, String replaceAll) throws IOException {
+                                       String charset, String replaceAll) {
         ReplaceCommand replaceCommand = new ReplaceCommand();
         replaceCommand.setInputFilePath(inputFile);
         replaceCommand.setOutputFilePath(fileToWrite);
@@ -188,7 +184,7 @@ public class ReplaceFunctionTest {
         replaceCommand.setNewWord(newWord);
         replaceCommand.setCharSet(charset);
         replaceCommand.setReplaceAll(replaceAll);
-        replaceCommand.ReplaceWord();
+        replaceCommand.run();
     }
     // endregion
 }
