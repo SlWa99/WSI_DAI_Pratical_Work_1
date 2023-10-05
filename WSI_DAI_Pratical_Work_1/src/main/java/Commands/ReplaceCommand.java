@@ -65,8 +65,12 @@ public class ReplaceCommand implements Runnable {
     @Override
     public void run() {
         try {
+            long begin = System.currentTimeMillis();
             validateInput();
             ReplaceWord();
+            long end = System.currentTimeMillis();
+            long executionTime = end - begin;
+            System.out.println("The Replace command was successful!\nExecution time : " + executionTime + " ms");
         } catch (IOException e) {
             System.err.println("Error: " + e.getMessage());
         }
