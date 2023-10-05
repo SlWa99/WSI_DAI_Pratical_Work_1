@@ -7,7 +7,6 @@ import java.nio.charset.StandardCharsets;
 
 /**
  * -----------------------------------------------------------------------------------
- *
  * @author      : Slimani Walid
  * @date        : 28.09.2023
  * @Description : This class is used to perform the command that can replace the first or all occurrences
@@ -48,7 +47,7 @@ public class ReplaceCommand implements Runnable {
 
     // region Replace all
     @Option(names = {"-ao", "--all-occurrences"},
-            description = "Replace all occurrences of the text", defaultValue = "true")
+            description = "Replace all occurrences of the text (default : true)", defaultValue = "true")
     private String replaceAll;
     // endregion
     // endregion
@@ -60,7 +59,9 @@ public class ReplaceCommand implements Runnable {
      * Nom          : run
      * Description  : This is the method called when the replace command is used. This method calls a first
      *                method that checks that the arguments are correct, then a second that makes the
-     *                word replacement.
+     *                word replacement. In addition, the execution time is calculated and a
+     *                message informs the user if the command has been successful. The execution
+     *                time is also displayed.
      */
     @Override
     public void run() {
@@ -135,7 +136,7 @@ public class ReplaceCommand implements Runnable {
 
     /**
      * Nom               : setReplaceAll
-     * Description       : Defines the boolean which indicate if the Replace function will replace
+     * Description       : Defines the string which indicate if the Replace function will replace
      *                     the first occurrence or all occurrences.
      * @param replaceAll : Boolean value (true = replace all, false = replace first occurrence)
      * @info             : This setter exists only to be able to use the replacement command in
@@ -151,7 +152,7 @@ public class ReplaceCommand implements Runnable {
 
     /**
      * Nom         : ReplaceWord
-     * Description : This function reads the input text and rewrites it in the output text, replacing
+     * Description : This function reads the input text and rewrites it in the output text file and replacing
      *               a given word with another one.
      * @throws IOException if an argument is incorrect or there's a problem when reading / writing a text file.
      */

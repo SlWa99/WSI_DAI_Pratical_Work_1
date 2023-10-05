@@ -7,7 +7,6 @@ import Commands.ReplaceCommand;
 
 /**
  * -----------------------------------------------------------------------------------
- *
  * @author      : Slimani Walid
  * @date        : 03.10.2023
  * @Description : This class contains unit tests for the ReplaceCommand class, which
@@ -87,7 +86,7 @@ public class ReplaceFunctionTest {
 
     /**
      * Nom                 : compareFile
-     * Description         : Compares the content of a file with the expected content after replacing$
+     * Description         : Compares the content of a file with the expected content after replacing
      *                       specific word occurrences and verifies that the content matches the
      *                       expected content.
      * @info               : This method compares the file that has been written with the expected file.
@@ -96,7 +95,7 @@ public class ReplaceFunctionTest {
      * @param validateFile : Path of the validation file containing the expected text after replacement.
      * @param oldWord      : Word to replace in the text.
      * @param newWord      : New word that will replace the old word.
-     * @param charset      : File encoding.
+     * @param charset      : File encoding (for the output text file).
      * @param replaceAll   : Indicates whether all occurrences of the word should be replaced (true) or
      *                       only the first one (false).
      * @param assertMsg    : Assertion message in case of a difference between the obtained content and
@@ -124,9 +123,9 @@ public class ReplaceFunctionTest {
 
     /**
      * Nom                 : compareInputFile
-     * Description         : Compares the content of a file with the expected content after replacing$
-     *                       specific word occurrences and verifies that the content matches the
-     *                       expected content.
+     * Description         : Compares the contents of the input file with the validation file to check
+     *                       if the replace function has modified the input file by writing to the
+     *                       output file.
      * @info               : This method compares the input file with the expected input file.
      * @param inputFile    : Path of the input file containing the text to process.
      * @param fileToWrite  : Path of the output file where the processed text will be written.
@@ -165,12 +164,11 @@ public class ReplaceFunctionTest {
      * Description        : Executes the replace command using the parameters given, such as the old word,
      *                      the new word, the encoding and whether to replace all occurrences or just
      *                      the first.
-     *
      * @param inputFile   : Path of the input file containing the text to process.
      * @param fileToWrite : Path of the output file where the processed text will be written.
      * @param oldWord     : Word to replace in the text.
      * @param newWord     : New word that will replace the old word.
-     * @param charset     : File encoding.
+     * @param charset     : File encoding (for the output text file).
      * @param replaceAll  : Indicates whether all occurrences of the word should be replaced (true) or
      *                      only the first one (false).
      */

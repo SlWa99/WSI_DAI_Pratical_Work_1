@@ -9,7 +9,8 @@ import java.io.*;
  * -----------------------------------------------------------------------------------
  * @author      : Slimani Walid
  * @date        : 28.09.2023
- * @Description : This class is used to perform the command that can convert an image to black and white.
+ * @Description : This class is used to perform the command that can convert an
+ *                image to black and white.
  * -----------------------------------------------------------------------------------
  **/
 
@@ -33,9 +34,11 @@ public class ConvertBlackWhiteCommand implements Runnable {
 
     /**
      * Nom          : run
-     * Description  : This is the method called when the replace command is used. This method calls a first
+     * Description  : This is the method called when the convert command is used. This method calls a first
      *                method that checks that the arguments are correct, then a second that makes
-     *                the image conversion.
+     *                the conversion image to black and white. In addition, the execution time is
+     *                calculated and a  message informs the user if the command has been successful.
+     *                The execution time is also displayed.
      */
     @Override
     public void run() {
@@ -52,6 +55,7 @@ public class ConvertBlackWhiteCommand implements Runnable {
     }
 
     // region Setter
+
     /**
      * Nom                   : setInputImagePath
      * Description           : Defines the path of the input image to be used for the convert function.
@@ -133,7 +137,7 @@ public class ConvertBlackWhiteCommand implements Runnable {
      * Description      : This function checks if the specified extension is valid for the output format.
      *                    Accepted formats are jpg, jpeg and png.
      * @param extension : Extension we want to check.
-     * @return : Boolean value indicates if the extension is valid or not.
+     * @return          : Boolean value indicates if the extension is valid or not.
      */
     private boolean isValidOutputFormat(String extension) {
         // List of supported image extensions

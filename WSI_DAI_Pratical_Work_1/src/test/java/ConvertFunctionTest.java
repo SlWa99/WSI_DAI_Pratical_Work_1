@@ -10,7 +10,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * -----------------------------------------------------------------------------------
- *
  * @author      : Slimani Walid
  * @date        : 04.10.2023
  * @Description : This class contains unit tests for the convertBlackWhiteCommand class, which
@@ -46,7 +45,7 @@ public class ConvertFunctionTest {
     /**
      * nom : verifyOutputImage
      * Description          : Verifies if the converted output image is in grayscale (black and white)
-     *                        by comparing each pixel of the image.
+     *                        by analysing each pixel of the image.
      * @param inputImage    : The path to the input image.
      * @param outputImage   : The path to the converted output image.
      * @throws IOException If there is an error reading the output image.
@@ -78,7 +77,7 @@ public class ConvertFunctionTest {
 
     /**
      * nom                : executeConvertCommand
-     * Description        : Executes the convert command to convert an image to black and white using
+     * Description        : Executes the command to convert an image to black and white using
      *                      the ConvertBlackWhiteCommand class.
      * @param inputImage  : The path to the input image.
      * @param outputImage : The path to the converted output image.
