@@ -35,8 +35,8 @@ $ java -jar MyApp.jar Replace input.txt output.txt oldWord newWord
 
 Additional options :
 
-+ -oe ou --output-file-encoding : Specify the output file encoding type (default: UTF-8).
-+ -ao ou --all-occurrences : If this option is set to true (default), all occurrences of oldWord will be replaced by newWord. If it is set to false, only the first occurrence will be replaced.
++ -oe or --output-file-encoding : Specify the output file encoding type (default: UTF-8).
++ -ao or --all-occurrences : If this option is set to true (default), all occurrences of oldWord will be replaced by newWord. If it is set to false, only the first occurrence will be replaced.
   
 #### Example Usage 2 (replace only the first occurrence) :
 
