@@ -7,8 +7,8 @@ import java.io.*;
 
 /**
  * -----------------------------------------------------------------------------------
- * @author : Slimani Walid
- * @date : 28.09.2023
+ * @author      : Slimani Walid
+ * @date        : 28.09.2023
  * @Description : This class is used to perform the command that can convert an image to black and white.
  * -----------------------------------------------------------------------------------
  **/
@@ -34,8 +34,8 @@ public class ConvertBlackWhiteCommand implements Runnable {
     /**
      * Nom          : run
      * Description  : This is the method called when the replace command is used. This method calls a first
-     * method that checks that the arguments are correct, then a second that makes
-     * the image conversion.
+     *                method that checks that the arguments are correct, then a second that makes
+     *                the image conversion.
      */
     @Override
     public void run() {
@@ -77,9 +77,8 @@ public class ConvertBlackWhiteCommand implements Runnable {
     /**
      * Nom          : convertToBlackAndWhite
      * Description  : This function converts input image to black & white.
-     *
-     * @throws IOException              if the input image or output path does not exist.
-     * @throws IOException              if the image format is incorrect.
+     * @throws IOException if the input image or output path does not exist.
+     * @throws IOException if the image format is incorrect.
      * @throws IllegalArgumentException if the output file extension is not valid for the output format.
      */
     private void convertToBlackAndWhite() throws IOException, IllegalArgumentException {
@@ -104,7 +103,6 @@ public class ConvertBlackWhiteCommand implements Runnable {
     /**
      * Nom          : validateInput
      * Description  : This function checks that the arguments given are valid.
-     *
      * @throws IOException if the input image does not exist or is invalid.
      * @throws IOException If the output image directory does not exist.
      */
@@ -129,8 +127,7 @@ public class ConvertBlackWhiteCommand implements Runnable {
     /**
      * Nom              : isValidOutputFormat
      * Description      : This function checks if the specified extension is valid for the output format.
-     * Accepted formats are jpg, jpeg and png.
-     *
+     *                    Accepted formats are jpg, jpeg and png.
      * @param extension : Extension we want to check.
      * @return : Boolean value indicates if the extension is valid or not.
      */
